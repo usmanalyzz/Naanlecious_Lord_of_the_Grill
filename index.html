@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#252733">
+  <title>Naanlecious & Lord of the Grill | Menu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #e6b84c;
+      --gold-light: #f4d76a;
+      --orange: #e85d04;
+      --orange-red: #ff6b35;
+      --gradient-btn: linear-gradient(135deg, #ff6b35 0%, #e85d04 50%, #d9534f 100%);
+      --bg-dark: #252733;
+      --bg-card: rgba(37, 39, 51, 0.7);
+      --bg-card-hover: rgba(45, 48, 65, 0.85);
+      --cream: #ffffff;
+      --cream-dim: #a8abb8;
+      --border-gold: rgba(230, 184, 76, 0.35);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-dark);
+      color: var(--cream);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Background - matches Naanlecious website */
+    .bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: 
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255, 107, 53, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 100% 80%, rgba(230, 184, 76, 0.06) 0%, transparent 40%),
+        var(--bg-dark);
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 2rem 1rem 2.5rem;
+      position: relative;
+    }
+
+    .logo-wrapper {
+      perspective: 1000px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .header-logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--gold);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(230, 184, 76, 0.3);
+    }
+
+    .brand-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2rem, 8vw, 3.5rem);
+      font-weight: 700;
+      color: var(--gold);
+      text-shadow: 0 0 30px rgba(230, 184, 76, 0.2);
+      transform-style: preserve-3d;
+      animation: floatBrand 4s ease-in-out infinite;
+    }
+
+    @keyframes floatBrand {
+      0%, 100% { transform: translateY(0) rotateX(0deg); }
+      50% { transform: translateY(-8px) rotateX(2deg); }
+    }
+
+    .tagline {
+      font-size: 0.9rem;
+      color: var(--cream-dim);
+      margin-top: 0.5rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    /* Section tabs */
+    .section-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0 1rem 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 0.6rem 1.4rem;
+      border: none;
+      background: var(--bg-card);
+      color: var(--cream-dim);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .tab-btn:hover {
+      background: var(--bg-card-hover);
+      color: var(--cream);
+    }
+
+    .tab-btn.active {
+      background: var(--gradient-btn);
+      color: white;
+      box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+    }
+
+    /* Menu sections */
+    .menu-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 1.25rem 3rem;
+    }
+
+    .menu-section {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .menu-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+      color: var(--gold);
+    }
+
+    /* 3D Menu Cards */
+    .menu-item {
+      perspective: 1200px;
+      margin-bottom: 1.25rem;
+      animation: cardReveal 0.6s ease backwards;
+    }
+
+    .menu-section .menu-item:nth-of-type(1) { animation-delay: 0.05s; }
+    .menu-section .menu-item:nth-of-type(2) { animation-delay: 0.1s; }
+    .menu-section .menu-item:nth-of-type(3) { animation-delay: 0.15s; }
+    .menu-section .menu-item:nth-of-type(4) { animation-delay: 0.2s; }
+    .menu-section .menu-item:nth-of-type(5) { animation-delay: 0.25s; }
+    .menu-section .menu-item:nth-of-type(6) { animation-delay: 0.3s; }
+    .menu-section .menu-item:nth-of-type(7) { animation-delay: 0.35s; }
+    .menu-section .menu-item:nth-of-type(8) { animation-delay: 0.4s; }
+    .menu-section .menu-item:nth-of-type(n+9) { animation-delay: 0.45s; }
+
+    @keyframes cardReveal {
+      from {
+        opacity: 0;
+        transform: translateY(30px) rotateX(-15deg);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+      }
+    }
+
+    .menu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: 16px;
+      padding: 1.25rem;
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.3s ease;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .menu-card:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 107, 53, 0.08);
+    }
+
+    .menu-card-inner {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .item-image {
+      flex-shrink: 0;
+      width: 90px;
+      height: 90px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(45, 48, 65, 0.6);
+      border: 1px solid var(--border-gold);
+    }
+
+    .item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .item-image img[src=""],
+    .item-image img:not([src]) {
+      display: none;
+    }
+
+    .item-content {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .item-info h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 0.25rem;
+    }
+
+    .item-desc {
+      font-size: 0.85rem;
+      color: var(--cream-dim);
+      line-height: 1.4;
+      opacity: 0.9;
+    }
+
+    .item-price {
+      font-weight: 600;
+      color: var(--gold);
+      font-size: 1.1rem;
+      white-space: nowrap;
+    }
+
+    /* Category headers */
+    .category-header {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.2rem;
+      color: var(--orange-red);
+      margin: 1.5rem 0 0.75rem;
+      padding-left: 0.5rem;
+      border-left: 4px solid var(--orange);
+    }
+
+    .category-header:first-of-type {
+      margin-top: 0;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--cream-dim);
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--orange-red);
+    }
+
+    /* Modal popup */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background: var(--bg-card-hover);
+      border: 1px solid var(--border-gold);
+      border-radius: 20px;
+      max-width: 420px;
+      width: 100%;
+      overflow: hidden;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6), 0 0 40px rgba(255, 107, 53, 0.1);
+    }
+
+    .modal-overlay.open .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-image-wrap {
+      width: 100%;
+      aspect-ratio: 1;
+      overflow: hidden;
+      background: rgba(45, 48, 65, 0.6);
+    }
+
+    .modal-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+    }
+
+    .modal-body h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-body .modal-desc {
+      font-size: 0.95rem;
+      color: var(--cream-dim);
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .modal-body .modal-price {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--gold);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: rgba(0, 0, 0, 0.5);
+      color: var(--cream);
+      font-size: 1.5rem;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: background 0.2s ease;
+    }
+
+    .modal-close:hover {
+      background: var(--gradient-btn);
+    }
+
+    .modal-content {
+      position: relative;
+    }
+
+    .menu-card {
+      cursor: pointer;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .menu-card:hover { transform: none; }
+      .brand-name { animation: none; }
+      .tab-btn:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-canvas"></div>
+
+  <header>
+    <div class="logo-wrapper">
+      <img src="logo.jpg" alt="Naanlecious" class="header-logo">
+      <h1 class="brand-name">Naanlecious</h1>
+    </div>
+    <p class="tagline">& Lord of the Grill</p>
+    <p class="tagline" style="font-size: 0.75rem; letter-spacing: 0.1em; margin-top: 0.25rem;">Liberty Market, Gujranwala</p>
+  </header>
+
+  <nav class="section-tabs">
+    <button class="tab-btn active" data-section="naanlecious">Naanlecious</button>
+    <button class="tab-btn" data-section="grill">Lord of the Grill</button>
+    <button class="tab-btn" data-section="drinks">Drinks & More</button>
+  </nav>
+
+  <main class="menu-container">
+    <!-- NAANLEcious Section -->
+    <section id="naanlecious" class="menu-section active">
+      <h2 class="section-title">Naanlecious</h2>
+
+      <h3 class="category-header">Signature Naans</h3>
+      <div class="menu-item">
+        <div class="menu-card">
+          <div class="menu-card-inner">
+            <div class="item-image">
+              <img src="images/supreme-pizza-naan.jpg" alt="Supreme Pizza Naan">
+            </div>
+            <div class="item-content">
+              <div class="item-info">
+                <h3>Supreme Pizza Naan</h3>
+                <p class="item-desc">Loaded with cheese, toppings & our special sauce</p>
+              </div>
+              <span class="item-price">Rs. 350</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-card">
+          <div class="menu-card-inner">
+            <div class="item-image">
+              <img src="images/chicken-cheese-naan.jpg" alt="Chicken Cheese Naan">
+            </div>
+            <div class="item-content">
+              <div class="item-info">
+                <h3>Chicken Cheese Naan</h3>
+                <p class="item-desc">Gooey cheese & tender chicken inside soft naan</p>
+              </div>
+              <span class="item-price">Rs. 320</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-card">
+          <div class="menu-card-inner">
+            <div class="item-image">
+              <img src="images/nutella-naan.jpg" alt="Nutella Naan">
+            </div>
+            <div class="item-content">
+              <div class="item-info">
+                <h3>Nutella Naan</h3>
+                <p class="item-desc">Sweet indulgence – Nutella spread on warm naan</p>
+              </div>
+              <span class="item-price">Rs. 280</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-card">
+          <div class="menu-card-inner">
+            <div class="item-image">
+              <img src="images/butter-naan.jpg" alt="Classic Butter Naan">
+            </div>
+            <div class="item-content">
+              <div class="item-info">
+                <h3>Classic Butter Naan</h3>
+                <p class="item-desc">Fresh tandoor naan with butter</p>
+              </div>
+              <span class="item-price">Rs. 80</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="category-header">Burgers & Wraps</h3>
+      <div class="menu-item">
+        <div class="menu-card">
+          <div class="menu-card-inner">
+            <div class="item-image">
+              <img src="images/chicken-burger.jpg" alt="Chicken Burger">
+            </div>
+            <div class="item-content">
+              <div class="item-info">
+                <h3>Chicken Burger</h3>
+                <p class="item-desc">Crispy chicken fillet with fresh veggies & sauces</p>
+              </div>
+              <span class="item-price">Rs. 280</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-card">
+          <div class="menu-card-inner">
+            <div class="item-image">
+              <img src="images/zinger-wrap.jpg" alt="Zinger Wrap">
+            </div>
+            <div class="item-content">
+              <div class="item-info">
+                <h3>Zinger Wrap</h3>
+                <p class="item-desc">Spicy zinger in soft tortilla with coleslaw</p>
+              </div>
+              <span class="item-price">Rs. 299</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="category-header">Sides & Specials</h3>
+      <div class="menu-item">
+        <div class="menu-card">
+          <div class="menu-card-inner">
+            <div class="item-image">
+              <img src="images/nitrogen-cheese-balls.jpg" alt="Nitrogen Cheese Balls">
+            </div>
+            <div class="item-content">
+              <div class="item-info">
+                <h3>Nitrogen Cheese Balls</h3>
+                <p class="item-desc">Crispy cheese balls with smoky nitrogen flair</p>
+              </div>
+              <span class="item-price">Rs. 350</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lord of the Grill Section -->
+    <section id="grill" class="menu-section">
+      <h2 class="section-title">Lord of the Grill</h2>
+
+      <h3 class="category-header">Grills & BBQs</h3>
+      <div class="menu-item">
+        <div class="menu-card">
+          <div class="menu-card-inner">
+            <div class="item-image">
+              <img src="images/chicken-tikka.jpg" alt="Chicken Tikka">
+            </div>
+            <div class="item-content">
+              <div class="item-info">
+                <h3>Chicken Tikka (Full)</h3>
+                <p class="item-desc">Tender marinated chicken from the tandoor</p>
+              </div>
+              <span class="item-price">Rs. 450</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-card">
+          <div class="menu-card-inner">
+            <div class="item-image">
+              <img src="images/seekh-kebab.jpg" alt="Seekh Kebab">
+            </div>
+            <div class="item-content">
+              <div class="item-info">
+                <h3>Seekh Kebab (6 pcs)</h3>
+                <p class="item-desc">Minced meat kebabs, spiced & grilled</p>
+              </div>
+              <span class="item-price">Rs. 380</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-card">
+          <div class="menu-card-inner">
+            <div class="item-image">
+              <img src="images/malai-boti.jpg" alt="Malai Boti">
+            </div>
+            <div class="item-content">
+              <div class="item-info">
+                <h3>Malai Boti</h3>
+                <p class="item-desc">Creamy marinade, soft & succulent</p>
+              </div>
+              <span class="item-price">Rs. 420</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-card">
+          <div class="menu-card-inner">
+            <div class="item-image">
+              <img src="images/mixed-grill-platter.jpg" alt="Mixed Grill Platter">
+            </div>
+            <div class="item-content">
+              <div class="item-info">
+                <h3>Mixed Grill Platter</h3>
+                <p class="item-desc">Tikka, seekh, malai boti with naan & raita</p>
+              </div>
+              <span class="item-price">Rs. 799</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="category-header">BBQ Skewers</h3>
+      <div class="menu-item">
+        <div class="menu-card">
+          <div class="menu-card-inner">
+            <div class="item-image">
+              <img src="images/chicken-bbq-skewer.jpg" alt="Chicken BBQ Skewer Plate">
+            </div>
+            <div class="item-content">
+              <div class="item-info">
+                <h3>Chicken BBQ Skewer Plate</h3>
+                <p class="item-desc">Marinated chicken skewers with rice/fries & veggies</p>
+              </div>
+              <span class="item-price">Rs. 420</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-card">
+          <div class="menu-card-inner">
+            <div class="item-image">
+              <img src="images/loaded-potatoes.jpg" alt="Loaded Potatoes">
+            </div>
+            <div class="item-content">
+              <div class="item-info">
+                <h3>Loaded Potatoes</h3>
+                <p class="item-desc">Fries topped with cheese, BBQ chicken & sauces</p>
+              </div>
+              <span class="item-price">Rs. 350</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Drinks & More Section -->
+    <section id="drinks" class="menu-section">
+      <h2 class="section-title">Drinks & More</h2>
+
+      <h3 class="category-header">Hot Beverages</h3>
+      <div class="menu-item">
+        <div class="menu-card">
+          <div class="menu-card-inner">
+            <div class="item-image">
+              <img src="images/tandoori-chai.jpg" alt="Tandoori Chai">
+            </div>
+            <div class="item-content">
+              <div class="item-info">
+                <h3>Tandoori Chai</h3>
+                <p class="item-desc">Smoky, bold chai from the tandoor</p>
+              </div>
+              <span class="item-price">Rs. 120</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-card">
+          <div class="menu-card-inner">
+            <div class="item-image">
+              <img src="images/karak-chai.jpg" alt="Karak Chai">
+            </div>
+            <div class="item-content">
+              <div class="item-info">
+                <h3>Karak Chai</h3>
+                <p class="item-desc">Strong, milky tea</p>
+              </div>
+              <span class="item-price">Rs. 80</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="category-header">Cold Drinks & Smoothies</h3>
+      <div class="menu-item">
+        <div class="menu-card">
+          <div class="menu-card-inner">
+            <div class="item-image">
+              <img src="images/mango-smoothie.jpg" alt="Mango Smoothie">
+            </div>
+            <div class="item-content">
+              <div class="item-info">
+                <h3>Mango Smoothie</h3>
+                <p class="item-desc">Fresh mango blended to perfection</p>
+              </div>
+              <span class="item-price">Rs. 180</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-card">
+          <div class="menu-card-inner">
+            <div class="item-image">
+              <img src="images/oreo-shake.jpg" alt="Oreo Shake">
+            </div>
+            <div class="item-content">
+              <div class="item-info">
+                <h3>Oreo Shake</h3>
+                <p class="item-desc">Creamy Oreo milkshake</p>
+              </div>
+              <span class="item-price">Rs. 220</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-card">
+          <div class="menu-card-inner">
+            <div class="item-image">
+              <img src="images/cold-coffee.jpg" alt="Cold Coffee">
+            </div>
+            <div class="item-content">
+              <div class="item-info">
+                <h3>Cold Coffee</h3>
+                <p class="item-desc">Iced coffee with cream</p>
+              </div>
+              <span class="item-price">Rs. 150</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Item detail modal -->
+  <div class="modal-overlay" id="itemModal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+      <div class="modal-image-wrap">
+        <img id="modalImage" src="" alt="">
+      </div>
+      <div class="modal-body">
+        <h2 id="modalTitle"></h2>
+        <p class="modal-desc" id="modalDesc"></p>
+        <p class="modal-price" id="modalPrice"></p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Scan the QR code on your table to view the menu</p>
+    <p style="margin-top: 0.5rem;"><a href="tel:0553821416">📞 055 3821416</a> · Liberty Market, Opposite Jinnah Stadium, Gujranwala</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.section).classList.add('active');
+      });
+    });
+
+    // Item modal
+    const modal = document.getElementById('itemModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalPrice = document.getElementById('modalPrice');
+    const modalClose = document.getElementById('modalClose');
+
+    function openModal(imgSrc, title, desc, price) {
+      modalImage.style.display = 'block';
+      modalImage.src = imgSrc;
+      modalImage.alt = title;
+      modalImage.onerror = () => modalImage.style.display = 'none';
+      modalTitle.textContent = title;
+      modalDesc.textContent = desc;
+      modalPrice.textContent = price;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+
+    document.querySelectorAll('.menu-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const img = card.querySelector('.item-image img');
+        const title = card.querySelector('.item-info h3')?.textContent || '';
+        const desc = card.querySelector('.item-desc')?.textContent || '';
+        const price = card.querySelector('.item-price')?.textContent || '';
+        const imgSrc = img?.src || img?.getAttribute('src') || '';
+        if (title) openModal(imgSrc, title, desc, price);
+      });
+    });
+
+    // Hide broken images so gradient placeholder shows
+    document.querySelectorAll('.item-image img').forEach(img => {
+      img.onerror = () => img.style.display = 'none';
+    });
+
+    // Subtle 3D tilt on cards when device supports it
+    document.querySelectorAll('.menu-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        if (window.matchMedia('(pointer: fine)').matches) {
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          card.style.transform = `rotateY(${-x * 6}deg) rotateX(${y * 4}deg) translateZ(20px) scale(1.02)`;
+        }
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  </script>
+</body>
+</html>
